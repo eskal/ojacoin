@@ -68,7 +68,7 @@
 #include <openssl/crypto.h>
 
 #if ENABLE_ZMQ
-#include "zmq/zmqnotificationinterface.h"
+#include "zmq/zmqnotificatioojacoinerface.h"
 #endif
 
 using namespace boost;
@@ -84,7 +84,7 @@ volatile bool fRestartRequested = false; // true: restart false: shutdown
 extern std::list<uint256> listAccCheckpointsNoDB;
 
 #if ENABLE_ZMQ
-static CZMQNotificationinterface* pzmqNotificationinterface = NULL;
+static CZMQNotificatioojacoinerface* pzmqNotificatioojacoinerface = NULL;
 #endif
 
 #ifdef WIN32
@@ -258,10 +258,10 @@ void PrepareShutdown()
 #endif
 
 #if ENABLE_ZMQ
-    if (pzmqNotificationinterface) {
-        Unregistervalidationinterface(pzmqNotificationinterface);
-        delete pzmqNotificationinterface;
-        pzmqNotificationinterface = NULL;
+    if (pzmqNotificatioojacoinerface) {
+        Unregistervalidationinterface(pzmqNotificatioojacoinerface);
+        delete pzmqNotificatioojacoinerface;
+        pzmqNotificatioojacoinerface = NULL;
     }
 #endif
 
@@ -1365,10 +1365,10 @@ bool AppInit2()
         AddOneShot(strDest);
 
 #if ENABLE_ZMQ
-    pzmqNotificationinterface = CZMQNotificationinterface::CreateWithArguments(mapArgs);
+    pzmqNotificatioojacoinerface = CZMQNotificatioojacoinerface::CreateWithArguments(mapArgs);
 
-    if (pzmqNotificationinterface) {
-        Registervalidationinterface(pzmqNotificationinterface);
+    if (pzmqNotificatioojacoinerface) {
+        Registervalidationinterface(pzmqNotificatioojacoinerface);
     }
 #endif
 
